@@ -11,8 +11,21 @@ function clientSideValidation(inputString) {
 
 function clickHandler() {
   const userName = usernameElement.value;
-  const sanitizedString = clientSideValidation(userName);
-  console.log(sanitizedString);
+  const validatedString = clientSideValidation(userName);
+  const myObject = {
+    userName: validatedString,
+  };
+  fetch('http://localhost:3000/greet', {
+    method: 'post',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(myObject),
+  }).then(res => res.json())
+    .then((greetObj) => {
+      outputElement.innerHTML = greetObj.greeting;
+    });
 }
 
 if (buttonElement !== null) {

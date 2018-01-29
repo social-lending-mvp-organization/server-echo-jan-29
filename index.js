@@ -22,4 +22,11 @@ server.register(require('inert'), (err) => {
       reply.file('./public/login.html');
     },
   });
+  server.route({
+    method: 'GET',
+    path: '/script.js',
+    handler(request, reply) {
+      reply.file('./public/script.js');
+    },
+  });
 });
